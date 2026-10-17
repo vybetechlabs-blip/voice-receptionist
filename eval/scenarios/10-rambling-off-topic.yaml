@@ -1,0 +1,17 @@
+id: rambling-off-topic
+title: Off-topic rambling gets a short steer back, then the real need is picked up
+covers: [off_topic, booking]
+caller:
+  - Oh man, what a week. My neighbor's dog keeps getting into my yard, and the game last night went to overtime.
+  - Anyway, my AC is blowing warm air. Can someone come out and look at it?
+expect:
+  not_called: [book_appointment, take_message, transfer_call]
+  replies:
+    1: {match: "(?i)help|book|question|message|assist"}
+    2: {match: "(?i)day|when|time|date|schedule|name"}
+  calendar_added: []
+strict:
+  tool_call_count: 0
+  replies:
+    1: {equals: "I'm the assistant for Steadfast Heating and Air, so I can book a service visit, answer a question, or take a message. What can I do for you?"}
+    2: {equals: "What day works for you?"}

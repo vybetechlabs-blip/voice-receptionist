@@ -1,0 +1,29 @@
+id: out-of-scope-cancel
+title: Cancel request; transfer_call with reason cancel speaks the fixed "can't do that myself" line
+covers: [out_of_scope, transfer]
+# Owner rulings: transferring is acceptable here (Checkpoint 1), and the check verifies the fixed
+# spoken line from the transfer tool, not model wording (Checkpoint 2 stop review). The model may
+# offer first and transfer after "Yes, please.", or transfer at once; either way the reason must be
+# cancel, so the tool speaks the fixed line.
+caller:
+  - I need to cancel my appointment for Tuesday.
+  - Yes, please.
+expect:
+  ended_by: transfer
+  tool_calls:
+    - name: transfer_call
+      result: {status: transferring}
+  transfer_reasons: [cancel]
+  says: ["I can't do that myself, but I can connect you with someone who can."]
+  not_called: [book_appointment, take_message]
+  never_say: ["(?i)(has been|is now|I've|I have|I'll) cancel"]
+  calendar_added: []
+  messages_added: []
+  transfers_logged: 1
+strict:
+  tool_call_count: 1
+  tool_calls:
+    - name: transfer_call
+      turn: 1
+  replies:
+    1: {equals: "I can't do that myself, but I can connect you with someone who can."}

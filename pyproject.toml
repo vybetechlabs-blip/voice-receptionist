@@ -1,0 +1,66 @@
+[project]
+name = "voice-receptionist"
+version = "0.0.1"
+description = "AI voice receptionist on Pipecat: guarded tools and a 15-scenario eval, run against one fictional business"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "fastapi>=0.115",
+    "nvidia-cublas-cu12>=12.4,<13 ; sys_platform == 'win32'",
+    "pipecat-ai[deepgram,webrtc,whisper]==1.11.0",
+    "pyyaml>=6",
+    "uvicorn>=0.32",
+]
+
+# Local text-to-speech engines are optional because both pull copyleft packages
+# (see "Third-party licenses" in README.md). The voice server needs one of them
+# or a hosted TTS; tests, text mode and eval.rescore need neither.
+[project.optional-dependencies]
+kokoro = ["pipecat-ai[kokoro]==1.11.0"]
+piper = ["pipecat-ai[piper]==1.11.0"]
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+    "ruff>=0.15",
+]
+
+[tool.uv]
+package = false
+
+[tool.ruff]
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F"]
+
+[tool.ruff.lint.per-file-ignores]
+# eval/harness.py is the scoring checker. Its bytes are fingerprinted in
+# eval/results/2026-09-26-comparison.md, so it is left exactly as written.
+"eval/harness.py" = ["F402"]  # preserves the checker fingerprint e674f1693299
+
+[tool.pytest.ini_options]
+testpaths = ["eval"]
+pythonpath = ["."]
+addopts = "-ra"
+# Raised by Pipecat's own audio utils on import; not ours to fix.
+filterwarnings = [
+    "ignore:'audioop' is deprecated:DeprecationWarning",
+    "ignore:`AudioContextTTSService` is deprecated:DeprecationWarning",
+]
+markers = [
+    "unit: deterministic tests of tools, config, prompt, and scripted-LLM parsing",
+    "scenario: scripted caller conversation through the full text-mode pipeline (rerun on a real LLM with --llm ollama)",
+    "strict: exact-wording checks that only hold for the deterministic ScriptedLLM",
+    "booking: book_appointment paths",
+    "faq: lookup_faq answers",
+    "no_fabrication: question not in the FAQ; the agent must offer a callback instead of guessing",
+    "message: take_message paths",
+    "transfer: transfer_call paths",
+    "off_topic: rambling or off-topic caller",
+    "out_of_scope: cancel, refund, discount requests",
+    "injection: prompt-injection attempts",
+    "disclosure: the agent identifies as an AI",
+]

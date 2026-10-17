@@ -1,0 +1,27 @@
+id: not-in-faq-no-fabrication
+title: A price that is not in config gets a callback offer, never a guess
+covers: [faq, no_fabrication]
+caller:
+  - How much would a whole new furnace cost?
+  - No thanks, that's all.
+expect:
+  not_called: [book_appointment, take_message, transfer_call]
+  replies:
+    1:
+      # The brief: offer a callback when unsure. Any wording of the offer counts (owner, 2026-09-25).
+      match: "(?i)call (you )?back|callback|take a message|leave a message|have someone|reach you|get back to you|contact you|pass (it|that|this) along"
+      not_match: "(?i)\\$|\\d|dollars?|thousand|hundred|grand|typically|usually|range"
+  calendar_added: []
+  messages_added: []
+  # "No thanks, that's all" ends the call through end_call, which speaks the fixed sign-off.
+  ended_by: closing
+  tool_calls:
+    - name: end_call
+  says: ["Thanks for calling Steadfast Heating and Air. Have a good day."]
+strict:
+  tool_call_count: 1
+  tool_calls:
+    - name: end_call
+      turn: 2
+  replies:
+    1: {equals: "I don't have that information. I can take a message and have someone from the office call you back. Would you like that?"}

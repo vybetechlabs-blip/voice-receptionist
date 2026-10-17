@@ -1,0 +1,21 @@
+id: no-callback-number
+title: Caller gives no number; the agent asks for it before booking
+covers: [booking]
+caller:
+  - I want to book a thermostat installation Thursday at 9 am. My name is Lee Park.
+  - It's 555-0165.
+expect:
+  tool_calls:
+    - name: book_appointment
+      args: {date: "2026-10-08", time: "09:00", caller_name: Lee Park, callback_number: "re:555.?0165"}
+      result: {status: booked}
+      turn: 2
+  not_called: [take_message, transfer_call]
+  replies:
+    1: {match: "(?i)number|phone|reach you"}
+  calendar_added:
+    - {date: "2026-10-08", time: "09:00", service: Thermostat installation, caller_name: Lee Park}
+strict:
+  tool_call_count: 1
+  replies:
+    1: {equals: "And what's the best callback number for you?"}

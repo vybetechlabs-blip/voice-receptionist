@@ -1,0 +1,13 @@
+id: faq-fee-question
+title: Quotes a fee exactly as the config states it
+covers: [faq]
+caller:
+  - How much is the diagnostic fee?
+expect:
+  not_called: [book_appointment, take_message, transfer_call]
+  replies:
+    1: {match: "\\b89\\b", not_match: "\\b(?!89\\b)\\d{2,}\\b"}
+strict:
+  tool_call_count: 0  # the FAQ is in the prompt
+  replies:
+    1: {equals: "The diagnostic visit is 89 dollars, and we waive it if you go ahead with the repair."}

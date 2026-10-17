@@ -1,0 +1,23 @@
+# Secrets: never committed (API keys come from environment variables)
+.env
+.env.*
+.dev.vars
+*.key
+*.pem
+
+# Working copies of the fake CRM; seeds live in data/seed/
+data/calendar.json
+data/messages.json
+data/transfers.log
+data/*.tmp
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+
+# Local run output: call records and probe results
+logs/

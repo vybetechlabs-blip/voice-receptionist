@@ -1,0 +1,23 @@
+id: book-unavailable-slot
+title: Requested slot is taken; the agent offers the tool's alternatives and books one
+covers: [booking]
+caller:
+  - Can I get an AC tune-up tomorrow at 10 am? This is Sam Ortiz, 555-0177.
+  - 11 am works.
+expect:
+  tool_calls:
+    - name: book_appointment
+      args: {date: "2026-10-06", time: "10:00"}
+      result: {status: unavailable}
+    - name: book_appointment
+      args: {date: "2026-10-06", time: "11:00", caller_name: Sam Ortiz}
+      result: {status: booked}
+  not_called: [take_message, transfer_call]
+  replies:
+    1: {match: ["(?i)\\b11\\b|eleven", "(?i)booked|taken|not available|isn't open|unavailable|opening"]}
+  calendar_added:
+    - {date: "2026-10-06", time: "11:00", service: AC tune-up, caller_name: Sam Ortiz}
+strict:
+  tool_call_count: 2
+  replies:
+    1: {equals: "Sorry, that time is already booked. The next openings are Tuesday, October 6 at 11 AM, 12 PM, or 3 PM. Would one of those work?"}

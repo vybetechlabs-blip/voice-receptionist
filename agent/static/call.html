@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Voice test</title>
+<style>
+  :root { --bg: #f7f7f5; --fg: #1d1d1b; --muted: #6b6b66; --accent: #0f6e5a; --warn: #8a4b00; --card: #ffffff; --line: #deded8; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #161615; --fg: #ececea; --muted: #a2a29c; --accent: #4cc3a5; --warn: #f0b060; --card: #202020; --line: #33332f; }
+  }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.5 system-ui, sans-serif; }
+  main { max-width: 34rem; margin: 3rem auto; padding: 0 16px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 1.5rem; }
+  h1 { font-size: 1.3rem; margin: 0 0 .25rem; }
+  .sub { color: var(--muted); margin: 0 0 1rem; font-size: .9rem; }
+  .notice { border-left: 3px solid var(--warn); padding: .5rem .75rem; margin: 0 0 1.25rem; font-weight: 600; }
+  button { font: inherit; padding: .6rem 1.2rem; border-radius: 8px; border: 1px solid var(--line); background: var(--card); color: var(--fg); cursor: pointer; }
+  button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  button:disabled { opacity: .45; cursor: default; }
+  #status { color: var(--muted); margin: 1rem 0 0; font-variant-numeric: tabular-nums; }
+</style>
+</head>
+<body>
+<main>
+  <div class="card">
+    <h1>Steadfast Heating &amp; Air</h1>
+    <p class="sub">Fictional business. Local test page for the voice receptionist (Phase 1).</p>
+    <p class="notice">You are talking to an AI assistant.</p>
+    <button id="call" class="primary">Call</button>
+    <button id="hangup" disabled>Hang up</button>
+    <p id="status">Idle.</p>
+    <audio id="remote" autoplay></audio>
+  </div>
+</main>
+<script>
+  const callBtn = document.getElementById("call");
+  const hangBtn = document.getElementById("hangup");
+  const statusEl = document.getElementById("status");
+  const remote = document.getElementById("remote");
+  let pc = null;
+  let mic = null;
+
+  const setStatus = (text) => { statusEl.textContent = text; };
+
+  function iceGatheringComplete(peer) {
+    if (peer.iceGatheringState === "complete") return Promise.resolve();
+    return new Promise((resolve) => {
+      const check = () => {
+        if (peer.iceGatheringState === "complete") {
+          peer.removeEventListener("icegatheringstatechange", check);
+          resolve();
+        }
+      };
+      peer.addEventListener("icegatheringstatechange", check);
+      setTimeout(resolve, 2000);  // host candidates are enough on localhost
+    });
+  }
+
+  async function call() {
+    callBtn.disabled = true;
+    try {
+      setStatus("Asking for the microphone...");
+      mic = await navigator.mediaDevices.getUserMedia({
+        audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true },
+      });
+      pc = new RTCPeerConnection();
+      mic.getTracks().forEach((track) => pc.addTrack(track, mic));
+      pc.ontrack = (event) => { remote.srcObject = event.streams[0] || new MediaStream([event.track]); };
+      pc.onconnectionstatechange = () => {
+        setStatus(`Connection: ${pc.connectionState}`);
+        if (["failed", "closed", "disconnected"].includes(pc.connectionState)) hangUp();
+      };
+      setStatus("Connecting...");
+      await pc.setLocalDescription(await pc.createOffer());
+      await iceGatheringComplete(pc);
+      const response = await fetch("/api/offer", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ sdp: pc.localDescription.sdp, type: pc.localDescription.type }),
+      });
+      if (!response.ok) throw new Error(`offer failed: ${response.status}`);
+      await pc.setRemoteDescription(await response.json());
+      hangBtn.disabled = false;
+    } catch (err) {
+      setStatus(`Could not start the call: ${err.message}`);
+      hangUp();
+    }
+  }
+
+  function hangUp() {
+    if (pc) { pc.close(); pc = null; }
+    if (mic) { mic.getTracks().forEach((t) => t.stop()); mic = null; }
+    hangBtn.disabled = true;
+    callBtn.disabled = false;
+    if (!statusEl.textContent.startsWith("Could not")) setStatus("Call ended.");
+  }
+
+  callBtn.addEventListener("click", call);
+  hangBtn.addEventListener("click", hangUp);
+</script>
+</body>
+</html>

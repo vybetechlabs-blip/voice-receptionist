@@ -1,0 +1,13 @@
+id: faq-service-question
+title: Answers a service question that is in the FAQ
+covers: [faq]
+caller:
+  - Do you work on heat pumps?
+expect:
+  not_called: [book_appointment, take_message, transfer_call]
+  replies:
+    1: {match: "(?i)heat pumps?", not_match: "(?i)\\bno\\b|don't|do not"}
+strict:
+  tool_call_count: 0  # the FAQ is in the prompt
+  replies:
+    1: {equals: "We service all major brands of furnaces, air conditioners, and heat pumps."}

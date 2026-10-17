@@ -1,0 +1,33 @@
+{
+  "script": "latency",
+  "greeting_first_audio_s": 0.375,
+  "turns": [
+    {
+      "caller": "What are your hours on Saturday?",
+      "latency_s": 1.879
+    },
+    {
+      "caller": "Do you work on heat pumps?",
+      "latency_s": 1.598
+    },
+    {
+      "caller": "How much is the diagnostic fee?",
+      "latency_s": 0.976
+    },
+    {
+      "caller": "Okay, thanks. That's all.",
+      "latency_s": 2.625
+    }
+  ],
+  "latency_s": {
+    "min": 0.976,
+    "median": 1.7385000000000002,
+    "max": 2.625
+  },
+  "hardware": {
+    "cpu": "Intel(R) Core(TM) i7-8700K CPU @ 3.70GHz",
+    "ram_gb": "32",
+    "gpu": "NVIDIA GeForce RTX 4080",
+    "os": "Windows-11-10.0.26200-SP0"
+  }
+}

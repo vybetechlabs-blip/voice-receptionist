@@ -1,0 +1,201 @@
+{
+  "script": "latency",
+  "greeting_first_audio_s": 0.422,
+  "turns": [
+    {
+      "caller": "What are your hours on Saturday?",
+      "latency_s": 1.202
+    },
+    {
+      "caller": "Do you work on heat pumps?",
+      "latency_s": 1.809
+    },
+    {
+      "caller": "How much is the diagnostic fee?",
+      "latency_s": 1.174
+    },
+    {
+      "caller": "Okay, thanks. That's all.",
+      "latency_s": 4.451
+    }
+  ],
+  "latency_s": {
+    "min": 1.174,
+    "median": 1.5055,
+    "max": 4.451
+  },
+  "hardware": {
+    "cpu": "Intel(R) Core(TM) i7-8700K CPU @ 3.70GHz",
+    "ram_gb": "32",
+    "gpu": "NVIDIA GeForce RTX 4080",
+    "os": "Windows-11-10.0.26200-SP0"
+  },
+  "server": {
+    "providers": {
+      "stt": "whisper",
+      "llm": "ollama",
+      "tts": "piper",
+      "ollama_model": "gpt-oss:20b"
+    },
+    "ended_by": "hangup",
+    "latency": [
+      {
+        "turn": 0,
+        "total_secs": 0.13,
+        "measured_from": "client_connected",
+        "parts": [
+          " 0.130s  pipeline             [pipecat]",
+          " 0.130s  TOTAL (from client connected)"
+        ]
+      },
+      {
+        "turn": 1,
+        "total_secs": 0.986,
+        "measured_from": "user_silence",
+        "parts": [
+          " 0.200s  endpointing wait     [config: VAD stop_secs]",
+          " 0.093s  transcription        [WhisperSTTService#1]",
+          " 0.020s  turn detection       [config: user turn strategies]",
+          " 0.417s  LLM inference        [OLLamaLLMService#1]",
+          " 0.119s  sentence aggregation [config: text_aggregation_mode]",
+          " 0.136s  speech synthesis     [PiperTTSService#1]",
+          " 0.986s  TOTAL"
+        ]
+      },
+      {
+        "turn": 2,
+        "total_secs": 1.61,
+        "measured_from": "user_silence",
+        "parts": [
+          " 0.200s  endpointing wait     [config: VAD stop_secs]",
+          " 0.090s  transcription        [WhisperSTTService#1]",
+          " 0.017s  turn detection       [config: user turn strategies]",
+          " 0.167s  LLM inference        [OLLamaLLMService#1]",
+          " 0.619s  LLM tool call        [OLLamaLLMService#1]",
+          " 0.267s  LLM inference        [OLLamaLLMService#1]",
+          " 0.086s  sentence aggregation [config: text_aggregation_mode]",
+          " 0.156s  speech synthesis     [PiperTTSService#1]",
+          " 0.008s  pipeline             [pipecat]",
+          " 1.610s  TOTAL"
+        ]
+      },
+      {
+        "turn": 3,
+        "total_secs": 0.967,
+        "measured_from": "user_silence",
+        "parts": [
+          " 0.200s  endpointing wait     [config: VAD stop_secs]",
+          " 0.090s  transcription        [WhisperSTTService#1]",
+          " 0.018s  turn detection       [config: user turn strategies]",
+          " 0.439s  LLM inference        [OLLamaLLMService#1]",
+          " 0.086s  sentence aggregation [config: text_aggregation_mode]",
+          " 0.132s  speech synthesis     [PiperTTSService#1]",
+          " 0.001s  pipeline             [pipecat]",
+          " 0.967s  TOTAL"
+        ]
+      },
+      {
+        "turn": 4,
+        "total_secs": 4.326,
+        "measured_from": "user_silence",
+        "parts": [
+          " 0.200s  endpointing wait     [config: VAD stop_secs]",
+          " 0.094s  transcription        [WhisperSTTService#1]",
+          " 2.913s  turn detection       [config: user turn strategies]",
+          " 0.504s  LLM inference        [OLLamaLLMService#1]",
+          " 0.538s  LLM inference        [OLLamaLLMService#1]",
+          " 0.023s  sentence aggregation [config: text_aggregation_mode]",
+          " 0.045s  speech synthesis     [PiperTTSService#1]",
+          " 0.009s  pipeline             [pipecat]",
+          " 4.326s  TOTAL"
+        ]
+      }
+    ],
+    "transcript": [
+      {
+        "speaker": "agent",
+        "text": "Thanks for calling Steadfast Heating and Air. I'm the AI assistant. I can book a service visit, answer questions, or take a message. How can I help?",
+        "turn": 0,
+        "interrupted": false
+      },
+      {
+        "speaker": "caller",
+        "text": "What are your hours on Saturday?",
+        "turn": 1,
+        "interrupted": false
+      },
+      {
+        "speaker": "agent",
+        "text": "We’re open Saturday from 9 AM to 1 PM.",
+        "turn": 1,
+        "interrupted": false
+      },
+      {
+        "speaker": "caller",
+        "text": "Do you work on heat pumps?",
+        "turn": 2,
+        "interrupted": false
+      },
+      {
+        "speaker": "agent",
+        "text": "Yes, we service heat pumps from all major brands.",
+        "turn": 2,
+        "interrupted": false
+      },
+      {
+        "speaker": "caller",
+        "text": "How much is the diagnostic fee?",
+        "turn": 3,
+        "interrupted": false
+      },
+      {
+        "speaker": "agent",
+        "text": "I’m sorry, I don’t have that information. I can take a message for a callback. What would you like me to pass on?",
+        "turn": 3,
+        "interrupted": false
+      },
+      {
+        "speaker": "caller",
+        "text": "Okay, thanks, that's all.",
+        "turn": 4,
+        "interrupted": false
+      },
+      {
+        "speaker": "agent",
+        "text": "Sure thing. Please give me your name and a callback number, and I’ll leave a message.",
+        "turn": 4,
+        "interrupted": false
+      }
+    ],
+    "tool_calls": [
+      {
+        "name": "lookup_faq",
+        "arguments": {
+          "question": "Do you work on heat pumps?"
+        },
+        "result": {
+          "id": "brands",
+          "question": "What equipment do you work on?",
+          "answer": "We service all major brands of furnaces, air conditioners, and heat pumps."
+        },
+        "turn": 2
+      },
+      {
+        "name": "take_message",
+        "arguments": {
+          "caller_name": "[no_name]",
+          "callback_number": "[no_number]",
+          "message": "Ask about diagnostic fee"
+        },
+        "result": {
+          "status": "invalid",
+          "errors": [
+            "caller_name '[no_name]' is not something the caller said. Ask the caller for it and pass their exact words.",
+            "callback_number '[no_number]' is not something the caller said. Ask the caller for it and pass their exact words."
+          ]
+        },
+        "turn": 4
+      }
+    ]
+  }
+}

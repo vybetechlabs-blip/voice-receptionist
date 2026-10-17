@@ -1,0 +1,22 @@
+id: transfer-request
+title: Asking for a person transfers the call and ends the session
+covers: [transfer]
+caller:
+  - Let me talk to a person.
+  - Hello? Is anyone there?
+expect:
+  ended_by: transfer
+  caller_turns: 1
+  tool_calls:
+    - name: transfer_call
+      result: {status: transferring}
+      turn: 1
+  not_called: [book_appointment, take_message]
+  replies:
+    1: {match: "(?i)hand|transfer|team|hold"}
+  transfers_logged: 1
+  says: ["Okay, I'm handing you to someone on the Steadfast team now. Please hold for a moment."]
+strict:
+  tool_call_count: 1
+  replies:
+    1: {equals: "Okay, I'm handing you to someone on the Steadfast team now. Please hold for a moment."}

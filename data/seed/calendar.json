@@ -1,0 +1,45 @@
+{
+  "_note": "FICTIONAL seed calendar for Steadfast Heating & Air (not a real business). Copied to data/calendar.json on first run.",
+  "bookings": [
+    {
+      "id": "BK-0001",
+      "date": "2026-10-06",
+      "time": "10:00",
+      "service": "AC tune-up",
+      "duration_minutes": 60,
+      "caller_name": "Seed booking (fictional)",
+      "callback_number": "555-0100",
+      "created_at": "2026-09-25T09:00"
+    },
+    {
+      "id": "BK-0002",
+      "date": "2026-10-06",
+      "time": "13:00",
+      "service": "Repair visit",
+      "duration_minutes": 90,
+      "caller_name": "Seed booking (fictional)",
+      "callback_number": "555-0101",
+      "created_at": "2026-09-25T09:00"
+    },
+    {
+      "id": "BK-0003",
+      "date": "2026-10-07",
+      "time": "09:00",
+      "service": "Furnace tune-up",
+      "duration_minutes": 60,
+      "caller_name": "Seed booking (fictional)",
+      "callback_number": "555-0102",
+      "created_at": "2026-09-25T09:00"
+    },
+    {
+      "id": "BK-0004",
+      "date": "2026-10-08",
+      "time": "08:00",
+      "service": "New system estimate",
+      "duration_minutes": 60,
+      "caller_name": "Seed booking (fictional)",
+      "callback_number": "555-0103",
+      "created_at": "2026-09-25T09:00"
+    }
+  ]
+}

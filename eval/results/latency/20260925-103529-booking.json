@@ -1,0 +1,171 @@
+{
+  "script": "booking",
+  "greeting_first_audio_s": 3.781,
+  "turns": [
+    {
+      "caller": "Hi, I'd like to book a furnace tune-up for Wednesday at 2 p.m.",
+      "latency_s": 2.767
+    },
+    {
+      "caller": "My name is Dana Reyes, and my number is 555-0134.",
+      "latency_s": 1.993
+    },
+    {
+      "caller": "Yes, that's right.",
+      "latency_s": 1.95
+    },
+    {
+      "caller": "No, that's all. Thanks, bye.",
+      "latency_s": 2.352
+    }
+  ],
+  "latency_s": {
+    "min": 1.95,
+    "median": 2.1725,
+    "max": 2.767
+  },
+  "hardware": {
+    "cpu": "Intel(R) Core(TM) i7-8700K CPU @ 3.70GHz",
+    "ram_gb": "32",
+    "gpu": "NVIDIA GeForce RTX 4080",
+    "os": "Windows-11-10.0.26200-SP0"
+  },
+  "server": {
+    "providers": {
+      "stt": "whisper",
+      "llm": "scripted",
+      "tts": "kokoro",
+      "ollama_model": "gpt-oss:20b"
+    },
+    "ended_by": "hangup",
+    "latency": [
+      {
+        "turn": 0,
+        "total_secs": 3.407,
+        "measured_from": "client_connected",
+        "parts": [
+          " 3.407s  pipeline             [pipecat]",
+          " 3.407s  TOTAL (from client connected)"
+        ]
+      },
+      {
+        "turn": 2,
+        "total_secs": 2.263,
+        "measured_from": "user_silence",
+        "parts": [
+          " 0.200s  endpointing wait     [config: VAD stop_secs]",
+          " 1.066s  speech synthesis     [KokoroTTSService#0]",
+          " 0.997s  pipeline             [pipecat]",
+          " 2.263s  TOTAL"
+        ]
+      },
+      {
+        "turn": 4,
+        "total_secs": 1.753,
+        "measured_from": "user_silence",
+        "parts": [
+          " 0.200s  endpointing wait     [config: VAD stop_secs]",
+          " 0.564s  transcription        [WhisperSTTService#0]",
+          " 0.003s  turn detection       [config: user turn strategies]",
+          " 0.984s  speech synthesis     [KokoroTTSService#0]",
+          " 0.003s  pipeline             [pipecat]",
+          " 1.753s  TOTAL"
+        ]
+      },
+      {
+        "turn": 5,
+        "total_secs": 1.767,
+        "measured_from": "user_silence",
+        "parts": [
+          " 0.200s  endpointing wait     [config: VAD stop_secs]",
+          " 0.560s  transcription        [WhisperSTTService#0]",
+          " 0.007s  turn detection       [config: user turn strategies]",
+          " 1.000s  speech synthesis     [KokoroTTSService#0]",
+          " 1.767s  TOTAL"
+        ]
+      },
+      {
+        "turn": 7,
+        "total_secs": 2.156,
+        "measured_from": "user_silence",
+        "parts": [
+          " 0.200s  endpointing wait     [config: VAD stop_secs]",
+          " 0.844s  transcription        [WhisperSTTService#0]",
+          " 0.008s  turn detection       [config: user turn strategies]",
+          " 1.103s  speech synthesis     [KokoroTTSService#0]",
+          " 0.001s  pipeline             [pipecat]",
+          " 2.156s  TOTAL"
+        ]
+      }
+    ],
+    "transcript": [
+      {
+        "speaker": "caller",
+        "text": "Hi, I'd like to book a furnace tune-up for Wednesday at 2P.",
+        "turn": 1,
+        "interrupted": false
+      },
+      {
+        "speaker": "caller",
+        "text": "M.",
+        "turn": 2,
+        "interrupted": false
+      },
+      {
+        "speaker": "agent",
+        "text": "What time works on Wednesday, September 30? We have visits from 8 AM to 5 PM.",
+        "turn": 2,
+        "interrupted": false
+      },
+      {
+        "speaker": "caller",
+        "text": "My name is Dana Raze.",
+        "turn": 3,
+        "interrupted": false
+      },
+      {
+        "speaker": "caller",
+        "text": "and my number is 555-0134.",
+        "turn": 4,
+        "interrupted": false
+      },
+      {
+        "speaker": "agent",
+        "text": "What time works on Wednesday, September 30? We have visits from 8 AM to 5 PM.",
+        "turn": 4,
+        "interrupted": false
+      },
+      {
+        "speaker": "caller",
+        "text": "Yes, that's right.",
+        "turn": 5,
+        "interrupted": false
+      },
+      {
+        "speaker": "agent",
+        "text": "What time works on Wednesday, September 30? We have visits from 8 AM to 5 PM.",
+        "turn": 5,
+        "interrupted": false
+      },
+      {
+        "speaker": "caller",
+        "text": "No, that's all.",
+        "turn": 6,
+        "interrupted": false
+      },
+      {
+        "speaker": "caller",
+        "text": "Thanks, bye.",
+        "turn": 7,
+        "interrupted": false
+      },
+      {
+        "speaker": "agent",
+        "text": "What time works on Wednesday, September 30? We have visits from 8 AM to 5 PM.",
+        "turn": 7,
+        "interrupted": false
+      }
+    ],
+    "tool_calls": []
+  }
+}

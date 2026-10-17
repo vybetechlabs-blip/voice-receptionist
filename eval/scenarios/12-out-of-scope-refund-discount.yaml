@@ -1,0 +1,25 @@
+id: out-of-scope-refund-discount
+title: Refund and discount request; transfer_call with reason refund or billing speaks the fixed line, and nothing is promised
+covers: [out_of_scope, transfer]
+# Owner rulings: transferring is acceptable here (Checkpoint 1), and the check verifies the fixed
+# spoken line from the transfer tool, not model wording (Checkpoint 2 stop review).
+caller:
+  - Can I get a refund for last week's repair? Or at least a discount on the next one?
+  - Yes, please.
+expect:
+  ended_by: transfer
+  tool_calls:
+    - name: transfer_call
+      result: {status: transferring}
+  transfer_reasons: [refund, billing]
+  says: ["I can't do that myself, but I can connect you with someone who can."]
+  not_called: [book_appointment, take_message]
+  never_say: ["(?i)\\d+ ?%|percent off|refund (has been|is|was) (issued|approved|processed)|discount (code|applied)|I'll (refund|apply)"]
+  calendar_added: []
+  messages_added: []
+  transfers_logged: 1
+strict:
+  tool_call_count: 1
+  tool_calls:
+    - name: transfer_call
+      turn: 1

@@ -1,0 +1,237 @@
+{
+  "script": "booking",
+  "greeting_first_audio_s": 3.359,
+  "turns": [
+    {
+      "caller": "Hi, I'd like to book a furnace tune-up for Wednesday at 2 p.m.",
+      "latency_s": 9.516
+    },
+    {
+      "caller": "My name is Dana Reyes, and my number is 555-0134.",
+      "latency_s": 6.764
+    },
+    {
+      "caller": "Yes, that's right.",
+      "latency_s": 2.34
+    },
+    {
+      "caller": "No, that's all. Thanks, bye.",
+      "latency_s": 2.015
+    }
+  ],
+  "latency_s": {
+    "min": 2.015,
+    "median": 4.552,
+    "max": 9.516
+  },
+  "hardware": {
+    "cpu": "Intel(R) Core(TM) i7-8700K CPU @ 3.70GHz",
+    "ram_gb": "32",
+    "gpu": "NVIDIA GeForce RTX 4080",
+    "os": "Windows-11-10.0.26200-SP0"
+  },
+  "server": {
+    "providers": {
+      "stt": "whisper",
+      "llm": "ollama",
+      "tts": "kokoro",
+      "ollama_model": "gpt-oss:20b"
+    },
+    "ended_by": "hangup",
+    "latency": [
+      {
+        "turn": 0,
+        "total_secs": 3.157,
+        "measured_from": "client_connected",
+        "parts": [
+          " 3.157s  pipeline             [pipecat]",
+          " 3.157s  TOTAL (from client connected)"
+        ]
+      },
+      {
+        "turn": 2,
+        "total_secs": 9.042,
+        "measured_from": "user_silence",
+        "parts": [
+          " 0.200s  endpointing wait     [config: VAD stop_secs]",
+          " 2.574s  LLM inference        [OLLamaLLMService#1]",
+          " 2.275s  LLM tool call        [OLLamaLLMService#1]",
+          " 1.035s  LLM inference        [OLLamaLLMService#1]",
+          " 0.205s  sentence aggregation [config: text_aggregation_mode]",
+          " 1.971s  speech synthesis     [KokoroTTSService#1]",
+          " 0.783s  pipeline             [pipecat]",
+          " 9.042s  TOTAL"
+        ]
+      },
+      {
+        "turn": 4,
+        "total_secs": 6.546,
+        "measured_from": "user_silence",
+        "parts": [
+          " 0.200s  endpointing wait     [config: VAD stop_secs]",
+          " 0.570s  transcription        [WhisperSTTService#1]",
+          " 0.007s  turn detection       [config: user turn strategies]",
+          " 2.909s  LLM inference        [OLLamaLLMService#1]",
+          " 0.965s  LLM tool call        [OLLamaLLMService#1]",
+          " 0.316s  LLM inference        [OLLamaLLMService#1]",
+          " 0.146s  sentence aggregation [config: text_aggregation_mode]",
+          " 1.428s  speech synthesis     [KokoroTTSService#1]",
+          " 0.005s  pipeline             [pipecat]",
+          " 6.546s  TOTAL"
+        ]
+      },
+      {
+        "turn": 5,
+        "total_secs": 2.157,
+        "measured_from": "user_silence",
+        "parts": [
+          " 0.200s  endpointing wait     [config: VAD stop_secs]",
+          " 0.609s  transcription        [WhisperSTTService#1]",
+          " 0.008s  turn detection       [config: user turn strategies]",
+          " 0.892s  LLM inference        [OLLamaLLMService#1]",
+          " 0.017s  sentence aggregation [config: text_aggregation_mode]",
+          " 0.428s  speech synthesis     [KokoroTTSService#1]",
+          " 0.003s  pipeline             [pipecat]",
+          " 2.157s  TOTAL"
+        ]
+      },
+      {
+        "turn": 7,
+        "total_secs": 1.826,
+        "measured_from": "user_silence",
+        "parts": [
+          " 0.200s  endpointing wait     [config: VAD stop_secs]",
+          " 0.593s  transcription        [WhisperSTTService#1]",
+          " 0.010s  turn detection       [config: user turn strategies]",
+          " 0.528s  LLM inference        [OLLamaLLMService#1]",
+          " 0.032s  sentence aggregation [config: text_aggregation_mode]",
+          " 0.464s  speech synthesis     [KokoroTTSService#1]",
+          " 1.826s  TOTAL"
+        ]
+      }
+    ],
+    "transcript": [
+      {
+        "speaker": "caller",
+        "text": "Hi, I'd like to book a furnace tune-up for Wednesday at 2P.",
+        "turn": 1,
+        "interrupted": false
+      },
+      {
+        "speaker": "caller",
+        "text": "M.",
+        "turn": 2,
+        "interrupted": false
+      },
+      {
+        "speaker": "agent",
+        "text": "Sure thing, I just need your phone number and a good time for us to call you back to lock in the appointment. May I have your callback number?",
+        "turn": 2,
+        "interrupted": false
+      },
+      {
+        "speaker": "caller",
+        "text": "My name is Dana Raze.",
+        "turn": 3,
+        "interrupted": false
+      },
+      {
+        "speaker": "caller",
+        "text": "and my number is 555-0134.",
+        "turn": 4,
+        "interrupted": false
+      },
+      {
+        "speaker": "agent",
+        "text": "I’m sorry, but we’re closed on Sundays, so that time isn’t available. We have openings on Monday, September 28th at 8 AM, 9 AM, or 10 AM. Do any of those times work for you?",
+        "turn": 4,
+        "interrupted": false
+      },
+      {
+        "speaker": "caller",
+        "text": "Yes, that's right.",
+        "turn": 5,
+        "interrupted": false
+      },
+      {
+        "speaker": "agent",
+        "text": "Great! Which time on Monday – 8 AM, 9 AM, or 10 AM – would you like to book?",
+        "turn": 5,
+        "interrupted": false
+      },
+      {
+        "speaker": "caller",
+        "text": "No, that's all.",
+        "turn": 6,
+        "interrupted": false
+      },
+      {
+        "speaker": "caller",
+        "text": "Thanks, bye.",
+        "turn": 7,
+        "interrupted": false
+      },
+      {
+        "speaker": "agent",
+        "text": "You’re welcome. Have a great day!",
+        "turn": 7,
+        "interrupted": false
+      }
+    ],
+    "tool_calls": [
+      {
+        "name": "take_message",
+        "arguments": {
+          "callback_number": "",
+          "caller_name": "M.",
+          "message": ""
+        },
+        "result": {
+          "status": "invalid",
+          "errors": [
+            "callback_number is missing or too short: ask for a phone number",
+            "message is empty: ask what the caller wants the office to know"
+          ]
+        },
+        "turn": 2
+      },
+      {
+        "name": "book_appointment",
+        "arguments": {
+          "callback_number": "555-0134",
+          "caller_name": "Dana Raze",
+          "date": "2026-09-27",
+          "service": "Furnace tune-up",
+          "time": "14:00"
+        },
+        "result": {
+          "status": "unavailable",
+          "reason": "the office is closed on Sundays",
+          "requested": {
+            "date": "2026-09-27",
+            "time": "14:00"
+          },
+          "service": "Furnace tune-up",
+          "alternatives": [
+            {
+              "date": "2026-09-28",
+              "time": "08:00",
+              "spoken": "Monday, September 28 at 8 AM"
+            },
+            {
+              "date": "2026-09-28",
+              "time": "09:00",
+              "spoken": "Monday, September 28 at 9 AM"
+            },
+            {
+              "date": "2026-09-28",
+              "time": "10:00",
+              "spoken": "Monday, September 28 at 10 AM"
+            }
+          ]
+        },
+        "turn": 4
+      }
+    ]
+  }
+}

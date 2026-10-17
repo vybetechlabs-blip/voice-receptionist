@@ -1,0 +1,23 @@
+id: not-in-faq-callback-message
+title: Unknown question, caller accepts the callback, and the message is saved
+covers: [faq, no_fabrication, message]
+caller:
+  - Do you offer financing?
+  - Sure. It's Priya Shah, 555-0110.
+expect:
+  tool_calls:
+    - name: take_message
+      args: {caller_name: Priya Shah, callback_number: "re:555.?0110"}
+      result: {status: saved}
+  not_called: [book_appointment, transfer_call]
+  replies:
+    1:
+      # The brief: offer a callback when unsure. Any wording of the offer counts (owner, 2026-09-25).
+      match: "(?i)call (you )?back|callback|take a message|leave a message|have someone|reach you|get back to you|contact you|pass (it|that|this) along"
+      not_match: "(?i)we (do )?(offer|have) financing|financing is available|\\byes\\b"
+  messages_added:
+    - {caller_name: Priya Shah, message: "re:(?i)financ"}
+strict:
+  tool_call_count: 1  # the FAQ miss is answered from the prompt; only take_message
+  replies:
+    2: {equals: "Thanks, Priya. I'll pass that along, and someone from the office will call you back at 555-0110. Anything else I can help with?"}

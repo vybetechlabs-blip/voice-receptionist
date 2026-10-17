@@ -1,0 +1,184 @@
+{
+  "script": "latency",
+  "greeting_first_audio_s": 1.141,
+  "turns": [
+    {
+      "caller": "What are your hours on Saturday?",
+      "latency_s": 2.67
+    },
+    {
+      "caller": "Do you work on heat pumps?",
+      "latency_s": 2.157
+    },
+    {
+      "caller": "How much is the diagnostic fee?",
+      "latency_s": 1.382
+    },
+    {
+      "caller": "Okay, thanks. That's all.",
+      "latency_s": 4.889
+    }
+  ],
+  "latency_s": {
+    "min": 1.382,
+    "median": 2.4135,
+    "max": 4.889
+  },
+  "hardware": {
+    "cpu": "Intel(R) Core(TM) i7-8700K CPU @ 3.70GHz",
+    "ram_gb": "32",
+    "gpu": "NVIDIA GeForce RTX 4080",
+    "os": "Windows-11-10.0.26200-SP0"
+  },
+  "server": {
+    "providers": {
+      "stt": "whisper",
+      "llm": "ollama",
+      "tts": "piper",
+      "ollama_model": "gpt-oss:20b"
+    },
+    "ended_by": "hangup",
+    "latency": [
+      {
+        "turn": 0,
+        "total_secs": 0.564,
+        "measured_from": "client_connected",
+        "parts": [
+          " 0.564s  pipeline             [pipecat]",
+          " 0.564s  TOTAL (from client connected)"
+        ]
+      },
+      {
+        "turn": 1,
+        "total_secs": 2.435,
+        "measured_from": "user_silence",
+        "parts": [
+          " 0.200s  endpointing wait     [config: VAD stop_secs]",
+          " 0.552s  transcription        [WhisperSTTService#0]",
+          " 0.048s  turn detection       [config: user turn strategies]",
+          " 1.364s  LLM inference        [OLLamaLLMService#0]",
+          " 0.154s  sentence aggregation [config: text_aggregation_mode]",
+          " 0.117s  speech synthesis     [PiperTTSService#0]",
+          " 2.435s  TOTAL"
+        ]
+      },
+      {
+        "turn": 2,
+        "total_secs": 1.888,
+        "measured_from": "user_silence",
+        "parts": [
+          " 0.200s  endpointing wait     [config: VAD stop_secs]",
+          " 0.541s  transcription        [WhisperSTTService#0]",
+          " 0.006s  turn detection       [config: user turn strategies]",
+          " 0.189s  LLM inference        [OLLamaLLMService#0]",
+          " 0.392s  LLM tool call        [OLLamaLLMService#0]",
+          " 0.349s  LLM inference        [OLLamaLLMService#0]",
+          " 0.080s  sentence aggregation [config: text_aggregation_mode]",
+          " 0.126s  speech synthesis     [PiperTTSService#0]",
+          " 0.004s  pipeline             [pipecat]",
+          " 1.888s  TOTAL"
+        ]
+      },
+      {
+        "turn": 3,
+        "total_secs": 1.199,
+        "measured_from": "user_silence",
+        "parts": [
+          " 0.200s  endpointing wait     [config: VAD stop_secs]",
+          " 0.538s  transcription        [WhisperSTTService#0]",
+          " 0.011s  turn detection       [config: user turn strategies]",
+          " 0.183s  LLM inference        [OLLamaLLMService#0]",
+          " 0.136s  sentence aggregation [config: text_aggregation_mode]",
+          " 0.127s  speech synthesis     [PiperTTSService#0]",
+          " 0.004s  pipeline             [pipecat]",
+          " 1.199s  TOTAL"
+        ]
+      },
+      {
+        "turn": 4,
+        "total_secs": 4.547,
+        "measured_from": "user_silence",
+        "parts": [
+          " 0.200s  endpointing wait     [config: VAD stop_secs]",
+          " 0.539s  transcription        [WhisperSTTService#0]",
+          " 2.460s  turn detection       [config: user turn strategies]",
+          " 1.156s  LLM inference        [OLLamaLLMService#0]",
+          " 0.079s  sentence aggregation [config: text_aggregation_mode]",
+          " 0.109s  speech synthesis     [PiperTTSService#0]",
+          " 0.004s  pipeline             [pipecat]",
+          " 4.547s  TOTAL"
+        ]
+      }
+    ],
+    "transcript": [
+      {
+        "speaker": "agent",
+        "text": "Thanks for calling Steadfast Heating and Air. I'm the AI assistant. I can book a service visit, answer questions, or take a message. How can I help?",
+        "turn": 0,
+        "interrupted": false
+      },
+      {
+        "speaker": "caller",
+        "text": "What are your hours on Saturday?",
+        "turn": 1,
+        "interrupted": false
+      },
+      {
+        "speaker": "agent",
+        "text": "We’re open on Saturday from 9 a.m. to 1 p.m.",
+        "turn": 1,
+        "interrupted": false
+      },
+      {
+        "speaker": "caller",
+        "text": "Do you work on heat pumps?",
+        "turn": 2,
+        "interrupted": false
+      },
+      {
+        "speaker": "agent",
+        "text": "Yes, we service major brands of heat pumps.",
+        "turn": 2,
+        "interrupted": false
+      },
+      {
+        "speaker": "caller",
+        "text": "How much is the diagnostic fee?",
+        "turn": 3,
+        "interrupted": false
+      },
+      {
+        "speaker": "agent",
+        "text": "I’m sorry, I don’t have that information. I can take a message for a callback. May I get your name and phone number?",
+        "turn": 3,
+        "interrupted": false
+      },
+      {
+        "speaker": "caller",
+        "text": "Okay, thanks, that's all.",
+        "turn": 4,
+        "interrupted": false
+      },
+      {
+        "speaker": "agent",
+        "text": "Thanks for calling Steadfast Heating and Air. Have a great day!",
+        "turn": 4,
+        "interrupted": false
+      }
+    ],
+    "tool_calls": [
+      {
+        "name": "lookup_faq",
+        "arguments": {
+          "question": "Do you work on heat pumps?"
+        },
+        "result": {
+          "id": "brands",
+          "question": "What equipment do you work on?",
+          "answer": "We service all major brands of furnaces, air conditioners, and heat pumps."
+        },
+        "turn": 2
+      }
+    ]
+  }
+}

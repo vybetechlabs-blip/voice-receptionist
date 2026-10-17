@@ -1,0 +1,211 @@
+{
+  "script": "latency",
+  "greeting_first_audio_s": 0.656,
+  "turns": [
+    {
+      "caller": "What are your hours on Saturday?",
+      "latency_s": 2.241
+    },
+    {
+      "caller": "Do you work on heat pumps?",
+      "latency_s": 1.215
+    },
+    {
+      "caller": "How much is the diagnostic fee?",
+      "latency_s": 1.715
+    },
+    {
+      "caller": "Okay, thanks. That's all.",
+      "latency_s": 3.638
+    }
+  ],
+  "latency_s": {
+    "min": 1.215,
+    "median": 1.9780000000000002,
+    "max": 3.638
+  },
+  "hardware": {
+    "cpu": "Intel(R) Core(TM) i7-8700K CPU @ 3.70GHz",
+    "ram_gb": "32",
+    "gpu": "NVIDIA GeForce RTX 4080",
+    "os": "Windows-11-10.0.26200-SP0"
+  },
+  "server": {
+    "providers": {
+      "stt": "whisper",
+      "llm": "ollama",
+      "tts": "piper",
+      "ollama_model": "gpt-oss:20b"
+    },
+    "ended_by": "hangup",
+    "latency": [
+      {
+        "turn": 0,
+        "total_secs": 0.214,
+        "measured_from": "client_connected",
+        "parts": [
+          " 0.214s  pipeline             [pipecat]",
+          " 0.214s  TOTAL (from client connected)"
+        ]
+      },
+      {
+        "turn": 1,
+        "total_secs": 2.04,
+        "measured_from": "user_silence",
+        "parts": [
+          " 0.200s  endpointing wait     [config: VAD stop_secs]",
+          " 0.457s  transcription        [WhisperSTTService#0]",
+          " 0.043s  turn detection       [config: user turn strategies]",
+          " 0.354s  LLM inference        [OLLamaLLMService#0]",
+          " 0.461s  LLM tool call        [OLLamaLLMService#0]",
+          " 0.262s  LLM inference        [OLLamaLLMService#0]",
+          " 0.117s  sentence aggregation [config: text_aggregation_mode]",
+          " 0.142s  speech synthesis     [PiperTTSService#0]",
+          " 0.004s  pipeline             [pipecat]",
+          " 2.040s  TOTAL"
+        ]
+      },
+      {
+        "turn": 2,
+        "total_secs": 0.963,
+        "measured_from": "user_silence",
+        "parts": [
+          " 0.200s  endpointing wait     [config: VAD stop_secs]",
+          " 0.090s  transcription        [WhisperSTTService#0]",
+          " 0.020s  turn detection       [config: user turn strategies]",
+          " 0.362s  LLM inference        [OLLamaLLMService#0]",
+          " 0.117s  LLM inference        [OLLamaLLMService#0]",
+          " 0.063s  sentence aggregation [config: text_aggregation_mode]",
+          " 0.105s  speech synthesis     [PiperTTSService#0]",
+          " 0.006s  pipeline             [pipecat]",
+          " 0.963s  TOTAL"
+        ]
+      },
+      {
+        "turn": 3,
+        "total_secs": 1.543,
+        "measured_from": "user_silence",
+        "parts": [
+          " 0.200s  endpointing wait     [config: VAD stop_secs]",
+          " 0.096s  transcription        [WhisperSTTService#0]",
+          " 0.003s  turn detection       [config: user turn strategies]",
+          " 0.175s  LLM inference        [OLLamaLLMService#0]",
+          " 0.528s  LLM tool call        [OLLamaLLMService#0]",
+          " 0.127s  LLM inference        [OLLamaLLMService#0]",
+          " 0.148s  sentence aggregation [config: text_aggregation_mode]",
+          " 0.258s  speech synthesis     [PiperTTSService#0]",
+          " 0.007s  pipeline             [pipecat]",
+          " 1.543s  TOTAL"
+        ]
+      },
+      {
+        "turn": 4,
+        "total_secs": 3.487,
+        "measured_from": "user_silence",
+        "parts": [
+          " 0.200s  endpointing wait     [config: VAD stop_secs]",
+          " 0.098s  transcription        [WhisperSTTService#0]",
+          " 2.899s  turn detection       [config: user turn strategies]",
+          " 0.157s  LLM inference        [OLLamaLLMService#0]",
+          " 0.080s  sentence aggregation [config: text_aggregation_mode]",
+          " 0.053s  speech synthesis     [PiperTTSService#0]",
+          " 3.487s  TOTAL"
+        ]
+      }
+    ],
+    "transcript": [
+      {
+        "speaker": "agent",
+        "text": "Thanks for calling Steadfast Heating and Air. I'm the AI assistant. I can book a service visit, answer questions, or take a message. How can I help?",
+        "turn": 0,
+        "interrupted": false
+      },
+      {
+        "speaker": "caller",
+        "text": "What are your hours on Saturday?",
+        "turn": 1,
+        "interrupted": false
+      },
+      {
+        "speaker": "agent",
+        "text": "We’re open Saturday from 9 AM to 1 PM.",
+        "turn": 1,
+        "interrupted": false
+      },
+      {
+        "speaker": "caller",
+        "text": "Do you work on heat pumps?",
+        "turn": 2,
+        "interrupted": false
+      },
+      {
+        "speaker": "agent",
+        "text": "Yes, we work on heat pumps.",
+        "turn": 2,
+        "interrupted": false
+      },
+      {
+        "speaker": "caller",
+        "text": "How much is the diagnostic fee?",
+        "turn": 3,
+        "interrupted": false
+      },
+      {
+        "speaker": "agent",
+        "text": "The diagnostic visit costs $89, and we waive it if you go ahead with the repair.",
+        "turn": 3,
+        "interrupted": false
+      },
+      {
+        "speaker": "caller",
+        "text": "Okay, thanks, that's all.",
+        "turn": 4,
+        "interrupted": false
+      },
+      {
+        "speaker": "agent",
+        "text": "You're welcome! If you need anything else, just let me know. Have a great day!",
+        "turn": 4,
+        "interrupted": false
+      }
+    ],
+    "tool_calls": [
+      {
+        "name": "lookup_faq",
+        "arguments": {
+          "question": "What are your hours on Saturday?"
+        },
+        "result": {
+          "id": "hours",
+          "question": "What are your hours?",
+          "answer": "We're open Monday through Friday from 8 AM to 5 PM, and Saturday from 9 AM to 1 PM. We're closed on Sunday."
+        },
+        "turn": 1
+      },
+      {
+        "name": "lookup_faq",
+        "arguments": {
+          "question": "Do you work on heat pumps?"
+        },
+        "result": {
+          "id": "brands",
+          "question": "What equipment do you work on?",
+          "answer": "We service all major brands of furnaces, air conditioners, and heat pumps."
+        },
+        "turn": 2
+      },
+      {
+        "name": "lookup_faq",
+        "arguments": {
+          "question": "How much is the diagnostic fee?"
+        },
+        "result": {
+          "id": "diagnostic-fee",
+          "question": "What does a repair visit cost?",
+          "answer": "The diagnostic visit is 89 dollars, and we waive it if you go ahead with the repair."
+        },
+        "turn": 3
+      }
+    ]
+  }
+}

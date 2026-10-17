@@ -1,0 +1,30 @@
+id: book-valid-slot
+title: Books an open slot after collecting service, day, time, name, and number
+covers: [booking]
+caller:
+  - Hi, I need to schedule a furnace tune-up.
+  - Wednesday at 2 pm works.
+  - Dana Reyes
+  - It's 555-0134.
+expect:
+  tool_calls:
+    - name: book_appointment
+      args: {date: "2026-10-07", time: "14:00", service: Furnace tune-up, caller_name: Dana Reyes}
+      result: {status: booked}
+  not_called: [take_message, transfer_call]
+  # The brief asks for name and number before booking, in any order of questions (owner,
+  # 2026-09-25): no turn-1 "which day" check.
+  collected_before:
+    book_appointment: [caller_name, callback_number]
+  replies:
+    4: {match: "(?i)all set|booked|confirmed|scheduled|set for"}
+  calendar_added:
+    - {date: "2026-10-07", time: "14:00", service: Furnace tune-up, caller_name: Dana Reyes, callback_number: "re:555.?0134"}
+  transfers_logged: 0
+strict:
+  tool_call_count: 1
+  replies:
+    1: {equals: "What day works for you?"}
+    2: {equals: "Can I get your name?"}
+    3: {equals: "And what's the best callback number for you?"}
+    4: {equals: "You're all set: Furnace tune-up on Wednesday, October 7 at 2 PM. We'll call 555-0134 if anything changes. Anything else I can help with?"}

@@ -1,0 +1,23 @@
+id: message-direct
+title: Caller leaves a message; name and number are collected first
+covers: [message]
+caller:
+  - Can I leave a message for the owner? Tell them the new thermostat is working great.
+  - Jordan Blake
+  - 555-0188
+expect:
+  tool_calls:
+    - name: take_message
+      args: {caller_name: Jordan Blake, callback_number: "re:555.?0188"}
+      result: {status: saved}
+  not_called: [book_appointment, transfer_call]
+  replies:
+    1: {match: "(?i)name"}
+  messages_added:
+    - {caller_name: Jordan Blake, message: "re:(?i)thermostat"}
+  calendar_added: []
+strict:
+  tool_call_count: 1
+  tool_calls:
+    - name: take_message
+      turn: 3

@@ -1,0 +1,15 @@
+id: hours-question
+title: Answers an hours question from config
+covers: [faq]
+caller:
+  - What are your hours on Saturday?
+expect:
+  not_called: [book_appointment, take_message, transfer_call]
+  replies:
+    1: {match: ["(?i)\\b9\\b|nine", "(?i)\\b1\\b|one"]}
+  calendar_added: []
+  messages_added: []
+strict:
+  tool_call_count: 0  # the FAQ is in the prompt; no lookup_faq round trip
+  replies:
+    1: {equals: "We're open Monday through Friday from 8 AM to 5 PM, and Saturday from 9 AM to 1 PM. We're closed on Sunday."}
