@@ -5,7 +5,7 @@
 ## Problem and result
 A phone assistant for a small business is trusted with the calendar, so a guess costs real money: a wrong day, an invented callback number, a refund nobody approved. voice-receptionist is an AI receptionist built on Pipecat 1.11.0 for one fictional business, Steadfast Heating & Air. It says up front that it is an AI, then books a visit, takes a message, or hands the call to a person. Its tools can only read and create, so there is no cancel, refund, delete or update. Guards check every tool call against what the caller actually said, and a name or number the caller never gave does not reach the calendar.
 
-The eval has 15 scripted callers, each run 3 times (45 runs). gpt-6-luna passes 45 of 45. A local gpt-oss:20b passes 43 of 45, and its guards blocked 12 calls that would have written bad data: 10 invented caller details and 2 unwarranted transfers. On the local voice stack, FAQ answers start 1.46 s after the caller stops (median of 24 turns), under the 1.5 s target. That figure is one machine and one voice engine, so read the Latency section before relying on it. The suite has 232 tests.
+The eval has 15 scripted callers, each run 3 times (45 runs). gpt-6-luna passes 45 of 45. A local gpt-oss:20b passes 43 of 45, and its guards blocked 12 calls that would have written bad data: 10 invented caller details and 2 unwarranted transfers. On the local voice stack, FAQ answers start 1.46 s after the caller stops (median of 24 turns), under the 1.5 s target. That figure is one machine and one voice engine, so read the Latency section before relying on it. The suite has 235 tests.
 
 ### How it works
 A call is a Pipecat pipeline. Speech or typed text goes to the model, the model calls tools, and the guards sit between the model and the tools.
@@ -136,7 +136,7 @@ uv run python -m agent.text_runner --llm scripted
 Type caller lines, for example "Hi, I need to schedule a furnace tune-up.", then "Wednesday at 2 pm works.", a name, and a number such as "555-0134"; `/quit` hangs up. The scripted rules recognize booking, hours, FAQ topics, messages and transfer requests, and answer anything else by asking what you need. Other commands, all keyless:
 
 ```bash
-uv run pytest                     # 232 tests
+uv run pytest                     # 235 tests
 uv run python -m eval.rescore eval/results/2026-09-25-gpt-6-luna-luna.json   # re-score a saved report, no model
 uv run python -m eval.latency_summary                                       # the latency block above
 uv run ruff check .
@@ -146,6 +146,11 @@ Three tests skip without downloaded speech models.
 They build a local speech service, which loads a model into memory, so they stay off even when the models are present. After `agent.fetch_models`, set `VOICE_RECEPTIONIST_LOAD_MODELS=1` to run them.
 
 Tested on Windows 11 with Python 3.12 only. The dependency pins and lockfile are cross-platform, but nothing here has been run on Linux or macOS.
+
+### Offline demo
+`uv run python -m agent.demo` runs the test suite and prints its summary line, then replays recorded tool calls through the guard layer. Each call goes through `call_tool`, the same path the live pipeline uses, and is checked against the caller's own lines. Nothing loads audio, speech models or an LLM, and the tools write to a scratch copy of the seed CRM, so the demo needs no key and no network and leaves `data/` alone.
+
+The booking replay has the model trim the caller's name and then invent a callback number. The guard refuses both calls before the tool runs, and the third call, built from the caller's own words, books the visit. The transfer replay has the caller try to override the instructions, and the transfer is refused. `--no-tests` skips the suite and prints only the replay.
 
 ### Voice server (needs downloads and one speech engine)
 The browser test page needs speech-to-text, a voice, and an LLM. Install one local voice (the licenses are under Third-party licenses), download the models, and start the server:
